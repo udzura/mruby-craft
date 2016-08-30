@@ -1,5 +1,2 @@
-class CRaft
-  def bye
-    self.hello + " bye"
-  end
+module CRaft
 end
