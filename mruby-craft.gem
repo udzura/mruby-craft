@@ -1,0 +1,6 @@
+name: mruby-craft
+description: CRaft class
+author: Uchio Kondo
+website: https://github.com/udzura/mruby-craft
+protocol: git
+repository: https://github.com/udzura/mruby-craft.git
