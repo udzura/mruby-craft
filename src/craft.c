@@ -8,10 +8,13 @@
 
 #include <mruby.h>
 #include <mruby/data.h>
+#include <mruby/class.h>
 
 #include <raft.h>
 
 #define DONE mrb_gc_arena_restore(mrb, 0);
+
+void mrb_mruby_craft_class_init(mrb_state *mrb, struct RClass *craft, struct RClass *entry);
 
 typedef struct {
   raft_server_t *srv;
@@ -55,11 +58,14 @@ static mrb_value mrb_craft_hello(mrb_state *mrb, mrb_value self)
 
 void mrb_mruby_craft_gem_init(mrb_state *mrb)
 {
-  struct RClass *craft, *server;
+  struct RClass *craft, *server, *entry;
   craft = mrb_define_module(mrb, "CRaft");
   server = mrb_define_class_under(mrb, craft, "Server", mrb->object_class);
 
   mrb_define_method(mrb, server, "initialize", mrb_craft_server_init, MRB_ARGS_NONE());
+
+  mrb_mruby_craft_class_init(mrb, craft, entry);
+
   DONE;
 }
 
